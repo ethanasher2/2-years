@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Room We Keep</title>
+    <!-- Tailwind CSS for modern layout styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts for custom typography (Caveat, Playfair Display, Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Playfair+Display:ital,wght=0,400;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bgGreen: '#306b34',
+                        textCream: '#fff0c8',
+                        textSoftGold: '#e5d1a4',
+                    },
+                    fontFamily: {
+                        handwriting: ['Caveat', 'cursive'],
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Smooth transitions for seamless immersive flow */
+        .fade-transition {
+            transition: opacity 1000ms ease-in-out, transform 1000ms ease-in-out;
+        }
+        
+        /* Custom subtle pulsing effect for the interactive buttons */
+        @keyframes subtle-pulse {
+            0%, 100% { opacity: 0.9; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.02); }
+        }
+        .pulsing-btn {
+            animation: subtle-pulse 3s infinite ease-in-out;
+        }
+        
+        /* Custom scrollbar to match the cozy room vibe */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #235226;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #fff0c8;
+            border-radius: 10px;
+        }
+
+        /* Polaroid style aesthetic styling */
+        .polaroid {
+            background: #fbf9f5;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            transform: rotate(-1deg);
+            transition: transform 0.5s ease;
+        }
+        .polaroid:hover {
+            transform: rotate(1deg) scale(1.02);
+        }
+    </style>
+</head>
+<body class="bg-bgGreen text-textCream min-h-screen font-sans overflow-x-hidden flex items-center justify-center relative select-none">
+
+    <!-- Soft warm background vignette to make it look deeply cozy and warm -->
+    <div class="absolute inset-0 bg-radial-vignette pointer-events-none opacity-40 mix-blend-multiply"></div>
+
+    <!-- MAIN APP CONTAINER -->
+    <main class="w-full max-w-4xl px-6 py-12 flex items-center justify-center min-h-screen z-10">
+
+        <!-- ================= SCREEN 1: THE WELCOME SCREEN ================= -->
+        <section id="screen-1" class="fade-transition opacity-100 flex flex-col items-center justify-center text-center space-y-4">
+            <!-- Main Handwriting Greeting -->
+            <h1 class="text-4xl md:text-6xl font-handwriting tracking-wide leading-relaxed font-medium">
+                The 
+                <button onclick="transitionToScreen2()" class="text-textSoftGold hover:text-textCream transition-colors duration-300 relative group font-bold tracking-widest px-2 focus:outline-none">
+                    room
+                    <span class="absolute -bottom-1 left-0 w-full h-[1.5px] bg-textSoftGold group-hover:bg-textCream transition-colors duration-300"></span>
+                </button> 
+                we keep for each other
+            </h1>
+            
+            <!-- Ultra-faint, whispered tiny guide hint for backup -->
+            <div class="pt-6 opacity-5 hover:opacity-20 transition-opacity duration-500 flex flex-col items-center space-y-1">
+                <span class="text-xs tracking-widest font-sans font-light">click the room word</span>
+                <span class="text-xs">↓</span>
+            </div>
+        </section>
+
+        <!-- ================= SCREEN 2: AND HERE, WE BEGIN ================= -->
+        <section id="screen-2" class="fade-transition opacity-0 hidden flex flex-col items-center justify-center text-center space-y-10">
+            <h2 class="text-3xl md:text-5xl font-serif italic text-textCream tracking-wide">
+                And here, we begin...
+            </h2>
+            
+            <!-- Custom curved, thin-line rectangle button -->
+            <button onclick="transitionToScreen3()" class="pulsing-btn border border-textCream/40 hover:border-textCream px-8 py-3 rounded-full text-xl md:text-2xl font-handwriting tracking-wider hover:bg-textCream/5 transition-all duration-500 focus:outline-none">
+                click here
+            </button>
+        </section>
+
+        <!-- ================= SCREEN 3: THE COMFORTS ESSENCE ================= -->
+        <section id="screen-3" class="fade-transition opacity-0 hidden flex flex-col items-center justify-center text-center max-w-2xl space-y-8">
+            
+            <!-- Paragraph Group 1 (Appears immediately on Screen 3 Load) -->
+            <div id="intro-p1" class="opacity-0 transition-opacity duration-1000 space-y-4">
+                <p class="text-xl md:text-2xl font-sans font-light leading-relaxed">
+                    A room is a comfort place for everyone, a place where people can be who they are without any sense of judgment.
+                </p>
+                <p class="text-xl md:text-2xl font-sans font-light leading-relaxed">
+                    Often times, people get such comfort not just from their room, but from people as well. They find comfort in the beauty of those who appreciate the beauty of them.
+                </p>
+            </div>
+
+            <!-- Paragraph Group 2 (Appears after 2 seconds) -->
+            <div id="intro-p2" class="opacity-0 transition-opacity duration-1000 space-y-4">
+                <p class="text-2xl md:text-3xl font-serif italic text-textSoftGold pt-4">
+                    And as far as it goes for me...
+                </p>
+                <p class="text-4xl md:text-5xl font-handwriting font-bold tracking-wide text-textCream">
+                    You... Harley, are my comfort room.
+                </p>
+            </div>
+
+            <!-- Instruction & Custom Start Button (Appears after 4 seconds total) -->
+            <div id="intro-p3" class="opacity-0 transition-opacity duration-1000 w-full flex flex-col items-center pt-10">
+                <p class="text-xl md:text-2xl font-handwriting text-textCream/70 text-center max-w-xl leading-relaxed">
+                    Don't believe it? I can prove it to you. Just click the little "start" button at the bottom right of your screen. I'll meet you there.
+                </p>
+                
+                <!-- Fixed at bottom-right corner of screen, fulfilling the exact written directions -->
+                <button id="floating-start-btn" onclick="transitionToScreen4()" class="fixed bottom-8 right-8 md:bottom-12 md:right-12 border border-textCream/40 hover:border-textCream bg-bgGreen/90 backdrop-blur-sm px-10 py-3 rounded-full text-2xl font-handwriting tracking-wider hover:bg-textCream/10 transition-all duration-500 whitespace-nowrap focus:outline-none shadow-lg z-50 pulsing-btn opacity-0 pointer-events-none transition-opacity duration-1000">
+                    start
+                </button>
+            </div>
+        </section>
+
+        <!-- ================= SCREEN 4: THE ROOM WALKTHROUGH ================= -->
+        <section id="screen-4" class="fade-transition opacity-0 hidden w-full flex flex-col space-y-8">
+            
+            <!-- Elegant Clean Header -->
+            <div class="border-b border-textCream/10 pb-4 text-center md:text-left flex flex-col md:flex-row items-center justify-between gap-2">
+                <h2 class="text-3xl md:text-4xl font-serif italic text-textSoftGold">
+                    The Room We Keep
+                </h2>
+                <!-- Active status count tracker -->
+                <span id="tracker-pill" class="text-xs font-sans tracking-widest text-textCream/40 uppercase bg-black/10 px-3 py-1 rounded-full">
+                    Explored: <span id="count-explored">0</span>/5
+                </span>
+            </div>
+
+            <!-- Split Panel Interaction Layout -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+                
+                <!-- Left Control: Room Aspects Selection Area -->
+                <nav class="md:col-span-5 flex flex-col space-y-3">
+                    <button onclick="selectAspect('door')" id="btn-door" class="w-full text-left py-4 px-6 rounded-xl border border-textCream/15 hover:border-textCream/40 hover:bg-textCream/5 transition-all duration-300 flex items-center justify-between group focus:outline-none">
+                        <span class="text-2xl font-handwriting tracking-wide group-hover:translate-x-1 transition-transform duration-300">Door</span>
+                        <span class="w-2.5 h-2.5 rounded-full border border-textCream/30 transition-all duration-300" id="dot-door"></span>
+                    </button>
+                    
+                    <button onclick="selectAspect('walls')" id="btn-walls" class="w-full text-left py-4 px-6 rounded-xl border border-textCream/15 hover:border-textCream/40 hover:bg-textCream/5 transition-all duration-300 flex items-center justify-between group focus:outline-none">
+                        <span class="text-2xl font-handwriting tracking-wide group-hover:translate-x-1 transition-transform duration-300">Walls</span>
+                        <span class="w-2.5 h-2.5 rounded-full border border-textCream/30 transition-all duration-300" id="dot-walls"></span>
+                    </button>
+                    
+                    <button onclick="selectAspect('window')" id="btn-window" class="w-full text-left py-4 px-6 rounded-xl border border-textCream/15 hover:border-textCream/40 hover:bg-textCream/5 transition-all duration-300 flex items-center justify-between group focus:outline-none">
+                        <span class="text-2xl font-handwriting tracking-wide group-hover:translate-x-1 transition-transform duration-300">Window</span>
+                        <span class="w-2.5 h-2.5 rounded-full border border-textCream/30 transition-all duration-300" id="dot-window"></span>
+                    </button>
+                    
+                    <button onclick="selectAspect('bed')" id="btn-bed" class="w-full text-left py-4 px-6 rounded-xl border border-textCream/15 hover:border-textCream/40 hover:bg-textCream/5 transition-all duration-300 flex items-center justify-between group focus:outline-none">
+                        <span class="text-2xl font-handwriting tracking-wide group-hover:translate-x-1 transition-transform duration-300">Bed</span>
+                        <span class="w-2.5 h-2.5 rounded-full border border-textCream/30 transition-all duration-300" id="dot-bed"></span>
+                    </button>
+                    
+                    <button onclick="selectAspect('dobby')" id="btn-dobby" class="w-full text-left py-4 px-6 rounded-xl border border-textCream/15 hover:border-textCream/40 hover:bg-textCream/5 transition-all duration-300 flex items-center justify-between group focus:outline-none">
+                        <span class="text-2xl font-handwriting tracking-wide group-hover:translate-x-1 transition-transform duration-300">Dobby</span>
+                        <span class="w-2.5 h-2.5 rounded-full border border-textCream/30 transition-all duration-300" id="dot-dobby"></span>
+                    </button>
+                </nav>
+
+                <!-- Right Display: Polaroid & Poetic Metadata Display -->
+                <div class="md:col-span-7 flex flex-col items-center space-y-6">
+                    
+                    <!-- Dynamic Polaroid Frame Component -->
+                    <div class="polaroid w-full max-w-sm p-4 rounded-sm flex flex-col space-y-4">
+                        <!-- Custom Photo Window -->
+                        <div class="w-full aspect-[4/3] bg-bgGreen/10 rounded-sm overflow-hidden flex items-center justify-center relative border border-black/5">
+                            <img id="polaroid-photo" src="https://i.pinimg.com/webp/1200x/21/b2/08/21b208dc4a3eca958c36c0a59958c2dd.webp" alt="Cozy room scene" class="w-full h-full object-cover transition-opacity duration-500 opacity-90">
+                            <!-- Soft overlay shading for photorealism -->
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
+                        </div>
+                        <!-- Polaroid Caption Area -->
+                        <div class="text-center font-handwriting text-black/80 text-3xl font-bold tracking-wide min-h-[40px] flex items-center justify-center" id="polaroid-caption">
+                            our room
+                        </div>
+                    </div>
+
+                    <!-- Description Text Box -->
+                    <div class="w-full bg-black/10 rounded-2xl p-6 min-h-[160px] border border-textCream/5 flex flex-col justify-center">
+                        <p id="aspect-description" class="text-lg md:text-xl font-sans font-light leading-relaxed text-textCream/90 whitespace-pre-line text-center md:text-left">
+                            select any aspect of the room from the left side of the screen to figure out its meaning <3
+                        </p>
+                    </div>
+
+                    <!-- Final Unfolding CTA Drawer (Unlocks when count-explored equals 5) -->
+                    <div id="final-cta-container" class="w-full opacity-0 max-h-0 overflow-hidden transition-all duration-1000 flex justify-center pt-2">
+                        <button onclick="revealFinalLetter()" class="pulsing-btn border border-textSoftGold hover:border-textCream text-textSoftGold hover:text-textCream py-3 px-12 rounded-full text-2xl md:text-3xl font-handwriting tracking-widest hover:bg-textCream/5 transition-all duration-500 focus:outline-none shadow-lg">
+                            next
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================= SCREEN 5: THE GRAND FINALE LETTER ================= -->
+        <section id="screen-5" class="fade-transition opacity-0 hidden w-full max-w-2xl flex flex-col space-y-8">
+            
+            <!-- Letter Header Banner -->
+            <div class="text-center space-y-2">
+                <h1 class="text-5xl md:text-6xl font-handwriting font-bold tracking-wider text-textCream">
+                    Two Years Down
+                </h1>
+                <p class="text-sm tracking-widest uppercase font-sans text-textCream/50">
+                    A letter to Harley
+                </p>
+                <div class="w-24 h-[1px] bg-textSoftGold/30 mx-auto mt-4"></div>
+            </div>
+
+            <!-- Handwritten Paper Scroll container mockup -->
+            <div class="bg-[#fbf9f5] text-stone-800 rounded-3xl p-8 md:p-12 shadow-2xl relative border-t-8 border-textSoftGold overflow-hidden leading-relaxed">
+                <!-- Warm ambient light reflection on paper card -->
+                <div class="absolute inset-0 bg-radial-gradient from-white/10 to-transparent pointer-events-none"></div>
+                
+                <div class="space-y-6 font-handwriting text-2xl md:text-3xl tracking-wide text-stone-800/90 whitespace-pre-line">
+                    my bish, my dearrrrr bish, happy friendship anniversary, 2 years bro.... i cant believe this, we're 2 years down the road, BUT THIS IS JUST THE BEGINNING, i will remind you about this day when we make it to 20 years bro, im sooo happy, and i hope that you are too, youve made these past 2 years extremely special for me, we had our ups and downs, we had our lefts and rights, but we are still here, better than ever, with DAT ENERGYYY!!!!!!, im tearing up while writing this, oh god, just imagine, that single day, 2 years ago, we texted each other, and decided to trust each other with our lives most deepest secrets, all this, we wouldn't have experienced any of it if it wasnt for that day 2 years ago, but it happened, and it was the best thing to ever happen to me, my entire life turned around, i felt seen, i felt appreciated, like there was someone who'd care for me, and listen to my silly things for hours straight without even complaining,
+
+                    OKAYYY.... im drifting away from me wishing you, okay, here it is
+
+                    bish, happy friendship anniversary to you, and to me too :) we'll stick together, and stay this way foreverrrrr, we will accept all the changes, all the ups and all the downs, and we will face each challenge, with a smile, and, maybe a few tears
+
+                    you've come to me like an angel, and i swear to protect this HUGGEEE never ending chunk of happiness with my life, to take care of you, and....even if im not able to help you, id still listen to you, and talk to you about it, and try my best to take your pain on me bish
+
+                    bless you, you're da best, youre always gonna be the best, i wish you good good health, and a happy and successful life bish, i hope you get filthy rich and buy me a chocolate fountain bish
+
+                    me will take a leave now, take care, bie bie from here
+
+                    syshie bish
+                    🫠
+                </div>
+            </div>
+
+            <!-- Beautiful Soft Footer note returning home -->
+            <div class="text-center pt-8">
+                <button onclick="restartExperience()" class="text-textCream/40 hover:text-textCream text-xl font-handwriting tracking-widest focus:outline-none transition-colors duration-300">
+                    ← go back inside our room
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        /* Interactive Room Data Map using exact word-for-word copy blocks and refined cosy photo URLs */
+        const roomElements = {
+            door: {
+                caption: "The Door",
+                photoUrl: "https://i.pinimg.com/736x/40/d6/67/40d667a2a12b1199cad785e25e3a93c2.jpg",
+                text: "The door of the room is the only way into the room and out of it. When the world feels too loud, you lock yourself inside to be in your comfort space. The door makes sure that all the noise stays out...\n\nYou... Harley, are like the door to this room of mine.\n\nIn the past few years, you've protected me from the bad phases, kept all my bad thoughts out, and only let the good ones in. You, as my door, gave me a sense of security and a sense of safety, because I know that there's no way any of the monsters outside are ever gonna reach me. Because you, my friendo, will always be there to protect me.\n\nI'm blessed to have you as a door, bish."
+            },
+            walls: {
+                caption: "The Walls",
+                photoUrl: "https://i.pinimg.com/webp/736x/41/be/22/41be220c2c25226b8a2a21944cc93608.webp",
+                text: "Just like the quote says, 'Deep within these four walls, I run from the world.'\n\nWalls are the most important part of the room. They not only keep the outside world outside, but also keep the inside world inside.\n\nYOU are the walls of my room. You form a space where I can be exactly who I am, where I won't be judged. These four walls have seen it all—seen me smile, seen me cry. These four walls have seen the best and the worst parts of who I am. Thank you for being the same, and thank you for being who you are. Even when I was high (not drug-wise... :'), even when I was low.\n\nThank you for keeping this fragile world of mine safe, and thank you for stopping the world outside from breaking what we've built inside. I'm blessed to have you as my walls, bish"
+            },
+            window: {
+                caption: "The Window",
+                photoUrl: "https://i.pinimg.com/webp/1200x/34/b1/de/34b1deb62e478cf89c0b4f9365404143.webp",
+                text: "The window is the aspect of the room that makes it beautiful. The window lets the beautiful light in, allows you to look at the gorgeous night sky, and gives you a glimpse of the outside world.\n\nYou, my best friend, are so similar to a window for me. You bring me light, even in my darkest phases. You've brought me tons and tons of light, which lit me up emotionally and physically. You brought me good thoughts and dreams to chase. You healed the parts of me that were stuck in the darkness of the past.\n\nThose parts were healed by you. You are the sun in my mornings, you are the moon of my night sky, and you are everything that makes it all beautiful—something worth living for.\n\nI feel blessed to have you as my window, bish."
+            },
+            bed: {
+                caption: "The Bed",
+                photoUrl: "https://i.pinimg.com/webp/736x/70/f9/67/70f967d6363562587066ae76d37a511b.webp",
+                text: "The bed, unlike all the other parts of the room, is something that most people keep extremely close to their hearts—something they share their ultimate comfort and deepest tears with. The bed is the place where you finally reach your peace of mind and sleep happily.\n\nYou, Harley, are like my bed to me. You are my comfort space, the place where I can be exactly who I am, where I can share everything without ever thinking twice. You provide me with a space that feels entirely mine, and mine forever. It’s peaceful, it’s lovely, and it is so deeply appreciated.\n\nYou provide me with the exact words that allow me to sleep peacefully at night. You take all my fears and bad phases away, leaving me only with a smile and happy tears. I'm happy to have you as my bed, bish!"
+            },
+            dobby: {
+                caption: "Dobby 🐰",
+                photoUrl: "https://i.pinimg.com/736x/ed/91/4c/ed914ccc0c0065846044723c964d6558.jpg",
+                text: "And of course, how could I leave our dear pet out of this? Our dearest, most smexy-looking pet, THY DOBBY—named by you, bish.\n\nI see you in Dobby. I see a friend—a good, loyal, trustworthy friend. That little shit makes my room and my life a mess, but all of it is a happy mess, and I wish everyone could have such a mess in their life.\n\nI don't know if you'd believe me, but I don't think I'd ever even have Dobby if I didn't have you. You made me into this person who could fall in love with the innocence of animals. From the times when I used to feed biscuits to the street dogs to the time I got Dobby, all of my animal interactions were shared with you. The way you loved them and appreciated them made me the kind of person who would ever even think about having a rabbit as a pet.\n\nSo, thank you, bish, for being who you are. I feel blessed to have you as my rabbit, my dawg, ma bish!"
+            }
+        };
+
+        /* State management trackers */
+        let exploredAspects = new Set();
+        let lastSelectedId = null;
+
+        /* Transitions: Screen 1 -> Screen 2 */
+        function transitionToScreen2() {
+            const s1 = document.getElementById('screen-1');
+            const s2 = document.getElementById('screen-2');
+            
+            s1.style.opacity = '0';
+            setTimeout(() => {
+                s1.classList.add('hidden');
+                s2.classList.remove('hidden');
+                setTimeout(() => {
+                    s2.style.opacity = '1';
+                }, 50);
+            }, 1000);
+        }
+
+        /* Transitions: Screen 2 -> Screen 3 (Paced text progression trigger) */
+        function transitionToScreen3() {
+            const s2 = document.getElementById('screen-2');
+            const s3 = document.getElementById('screen-3');
+            
+            s2.style.opacity = '0';
+            setTimeout(() => {
+                s2.classList.add('hidden');
+                s3.classList.remove('hidden');
+                setTimeout(() => {
+                    s3.style.opacity = '1';
+                    
+                    // Progressive step delay animations
+                    setTimeout(() => {
+                        const p1 = document.getElementById('intro-p1');
+                        p1.classList.remove('opacity-0');
+                        p1.classList.add('opacity-100');
+                    }, 500);
+
+                    setTimeout(() => {
+                        const p2 = document.getElementById('intro-p2');
+                        p2.classList.remove('opacity-0');
+                        p2.classList.add('opacity-100');
+                    }, 2500);
+
+                    setTimeout(() => {
+                        const p3 = document.getElementById('intro-p3');
+                        p3.classList.remove('opacity-0');
+                        p3.classList.add('opacity-100');
+                        
+                        // Reveal the floating "Start" button in the bottom right corner of the viewport
+                        const floatingBtn = document.getElementById('floating-start-btn');
+                        floatingBtn.classList.remove('opacity-0', 'pointer-events-none');
+                        floatingBtn.classList.add('opacity-100');
+                    }, 4500);
+
+                }, 50);
+            }, 1000);
+        }
+
+        /* Transitions: Screen 3 -> Screen 4 */
+        function transitionToScreen4() {
+            const s3 = document.getElementById('screen-3');
+            const s4 = document.getElementById('screen-4');
+            const floatingBtn = document.getElementById('floating-start-btn');
+            
+            // Fade out the floating button with the rest of screen 3
+            floatingBtn.classList.remove('opacity-100');
+            floatingBtn.classList.add('opacity-0', 'pointer-events-none');
+            s3.style.opacity = '0';
+            
+            setTimeout(() => {
+                s3.classList.add('hidden');
+                s4.classList.remove('hidden');
+                setTimeout(() => {
+                    s4.style.opacity = '1';
+                }, 50);
+            }, 1000);
+        }
+
+        function selectAspect(aspectKey) {
+            const aspect = roomElements[aspectKey];
+            if (!aspect) return;
+
+            // Mark current selection in states
+            exploredAspects.add(aspectKey);
+            document.getElementById('count-explored').textContent = exploredAspects.size;
+
+            // Highlight side buttons actively
+            if (lastSelectedId) {
+                const prevBtn = document.getElementById(`btn-${lastSelectedId}`);
+                if (prevBtn) {
+                    prevBtn.classList.remove('bg-textCream/10', 'border-textCream/60');
+                    prevBtn.classList.add('border-textCream/15');
+                }
+            }
+            const activeBtn = document.getElementById(`btn-${aspectKey}`);
+            if (activeBtn) {
+                activeBtn.classList.remove('border-textCream/15');
+                activeBtn.classList.add('bg-textCream/10', 'border-textCream/60');
+            }
+            lastSelectedId = aspectKey;
+
+            // Fill validation status dots indicator
+            const targetDot = document.getElementById(`dot-${aspectKey}`);
+            if (targetDot) {
+                targetDot.classList.remove('border-textCream/30');
+                targetDot.classList.add('bg-textCream', 'border-textCream');
+            }
+
+            // Animate polaroid contents transition softly
+            const photoEl = document.getElementById('polaroid-photo');
+            const captionEl = document.getElementById('polaroid-caption');
+            const descEl = document.getElementById('aspect-description');
+
+            photoEl.style.opacity = '0';
+            captionEl.style.opacity = '0';
+            descEl.style.opacity = '0';
+
+            setTimeout(() => {
+                photoEl.src = aspect.photoUrl;
+                captionEl.textContent = aspect.caption;
+                descEl.textContent = aspect.text;
+
+                photoEl.style.opacity = '0.9';
+                captionEl.style.opacity = '1';
+                descEl.style.opacity = '1';
+            }, 400);
+
+            // Unlock Final letter when 5 elements are successfully visited (Door, Walls, Window, Bed, Dobby)
+            if (exploredAspects.size === 5) {
+                const ctaContainer = document.getElementById('final-cta-container');
+                setTimeout(() => {
+                    ctaContainer.classList.remove('max-h-0', 'opacity-0');
+                    ctaContainer.classList.add('max-h-[100px]', 'opacity-100');
+                    // Smooth scroll down slightly to ensure the new button is spotted
+                    setTimeout(() => {
+                        ctaContainer.scrollIntoView({ behavior: 'smooth', block: 'end' });
+                    }, 500);
+                }, 1000);
+            }
+        }
+
+        /* Transitions: Screen 4 -> Screen 5 (Grand Finale Reveal) */
+        function revealFinalLetter() {
+            const s4 = document.getElementById('screen-4');
+            const s5 = document.getElementById('screen-5');
+            
+            s4.style.opacity = '0';
+            setTimeout(() => {
+                s4.classList.add('hidden');
+                s5.classList.remove('hidden');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                setTimeout(() => {
+                    s5.style.opacity = '1';
+                }, 50);
+            }, 1000);
+        }
+
+        /* Reset and restart experience loop */
+        function restartExperience() {
+            const s5 = document.getElementById('screen-5');
+            const s1 = document.getElementById('screen-1');
+            
+            // Clean dynamic state
+            exploredAspects.clear();
+            document.getElementById('count-explored').textContent = "0";
+            
+            // Reset aspect highlight visual frames
+            const keys = ['door', 'walls', 'window', 'bed', 'dobby'];
+            keys.forEach(k => {
+                const dot = document.getElementById(`dot-${k}`);
+                if (dot) {
+                    dot.className = "w-2.5 h-2.5 rounded-full border border-textCream/30 transition-all duration-300";
+                }
+                const btn = document.getElementById(`btn-${k}`);
+                if (btn) {
+                    btn.className = "w-full text-left py-4 px-6 rounded-xl border border-textCream/15 hover:border-textCream/40 hover:bg-textCream/5 transition-all duration-300 flex items-center justify-between group focus:outline-none";
+                }
+            });
+            
+            // Reset Polaris back to initial cozy empty room photo
+            document.getElementById('polaroid-photo').src = "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&q=80&w=800";
+            document.getElementById('polaroid-caption').textContent = "our room";
+            document.getElementById('aspect-description').textContent = "select any aspect of the room from the left side of the screen to figure out its meaning <3";
+            
+            // Close final cta drawer
+            const ctaContainer = document.getElementById('final-cta-container');
+            ctaContainer.classList.add('max-h-0', 'opacity-0');
+            ctaContainer.classList.remove('max-h-[100px]', 'opacity-100');
+
+            lastSelectedId = null;
+
+            s5.style.opacity = '0';
+            setTimeout(() => {
+                s5.classList.add('hidden');
+                s1.classList.remove('hidden');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                setTimeout(() => {
+                    s1.style.opacity = '1';
+                }, 50);
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
